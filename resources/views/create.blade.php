@@ -24,6 +24,13 @@
                             {{old('description')}}
                         </textarea>
                     </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Category</label>
+                        <select name="category_id" id="" class="form-select">
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->category}}</option>
+                            @endforeach
+                    </div>
                     <input type="submit" class="btn btn-primary" value="Add Post">
                     <a href="/posts" class="btn btn-primary">Back</a>
                 </form>

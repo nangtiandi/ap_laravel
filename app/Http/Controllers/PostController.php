@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+        // $this->middleware('auth')->only('index','create'); reverse
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +32,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $categories = Category::all();
+        return view('create',compact('categories'));
     }
 
     /**
@@ -42,10 +48,14 @@ class PostController extends Controller
         // $post->name = $request->name;
         // $post->description = $request->description;
         // $post->save();
-        Post::create([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
+        $validated = $request->validated();
+        // dd($validated);
+        Post::create($validated);
+        // Post::create([
+        //     'name' => $request->name,
+        //     'description' => $request->description,
+        //     'category_id' => $request->category_id,
+        // ]);
 
         return redirect('/posts');
     }
@@ -59,7 +69,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         // $post = Post::findOrFail($id);
-        dd($post->category->category);
+        // dd($post->category->category);
         return view('show',compact('post'));
     }
 
@@ -72,8 +82,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // $post = Post::findOrFail($id);
+        $categories = Category::all();
         
-        return view('edit',compact('post'));
+        return view('edit',compact('post','categories'));
     }
 
     /**
@@ -92,6 +103,7 @@ class PostController extends Controller
         $post->update([
             'name' => $request->name,
             'description' => $request->description,
+            'category_id' => $request->category_id,
         ]);
 
         return redirect('/posts');

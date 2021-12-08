@@ -7,6 +7,7 @@
             </div>
             <div class="card-body">
             <p class="card-text"> {{$post->description}} </p>
+            <p class="card-text"> {{'Category Type : ' . $post->category->category}} </p>
                 <a href="/posts" class="btn btn-primary">Back</a>
             </div>
         </div>

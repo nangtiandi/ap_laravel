@@ -27,6 +27,7 @@ class StorePostRequest extends FormRequest
         return [
             'name' => 'required',
             'description' => 'required',
+            'category_id' => 'required',
         ];
     }
     public function messages()
@@ -34,6 +35,7 @@ class StorePostRequest extends FormRequest
         return [
             'name.required' => 'You should write some title',
             'description.required' => 'you should describe your description',
+            'category.required' => 'you should describe your category',
         ];
     }
 }
