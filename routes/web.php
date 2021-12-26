@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Models\Test;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,18 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('/',function () {
+//   $container = new Container;
+//   $container->bind('test',function () {
+//      return new Test();
+//   });
+//   $test = $container->resolve('test');
+//   dd($test->smth());
+//});
+Route::get('/',function () {
+    return Request::input('name');
+});
 
+//Route::get('/',[HomeController::class,'index']);
 
-Route::get('/',[HomeController::class,'index']);
+Route::resource('category',CategoryController::class);
