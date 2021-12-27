@@ -12,10 +12,10 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected static function booted()
-    {
-        static::created(function ($category) {
-            Mail::to('nangdi00@gmail.com')->send(new MarkdownMail($category));
-        });
-    }
+//    protected static function booted()
+//    {
+//        static::created(function ($category) {
+//            Mail::to('nangdi00@gmail.com')->send(new MarkdownMail($category));
+//        });
+//    }
 }

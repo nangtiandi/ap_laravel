@@ -25,9 +25,13 @@ use App\Http\Controllers\CategoryController;
 //   dd($test->smth());
 //});
 Route::get('/',function () {
-    return Request::input('name');
+    return view('welcome');
 });
 
 //Route::get('/',[HomeController::class,'index']);
 
 Route::resource('category',CategoryController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

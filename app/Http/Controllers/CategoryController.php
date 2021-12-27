@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CategoryEvent;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\User;
+use App\Notifications\CategoryNotification;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CatMail;
+use Illuminate\Support\Facades\Notification;
 
 class CategoryController extends Controller
 {
@@ -38,8 +42,12 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+//        $user = User::find(1);
+//        $user->notify(new CategoryNotification());
+//        Notification::send(User::find(1), new CategoryNotification());
         $category = new Category();
         $category->category = $request->category;
+        event(new CategoryEvent($category));
         $category->save();
 
 
